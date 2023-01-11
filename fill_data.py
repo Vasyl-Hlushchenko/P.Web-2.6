@@ -1,6 +1,6 @@
 from datetime import datetime
 import faker
-from random import randint, choice, shuffle
+from random import randint, choice
 import sqlite3
 
 NUMBER_STUDENTS = 39
@@ -62,8 +62,8 @@ def prepare_data(students, groups, subjects, teachers, dates, marks):
 
     for_marks = []
     for student in students:
-        for _ in range(NUMBER_MARKS):
-            for_marks.append((student, randint(1, len(subjects)+1), choice(marks), choice(dates)))
+        for i in range(1, NUMBER_MARKS):
+            for_marks.append((i, randint(1, len(subjects)+1), choice(marks), choice(dates)))
     
 
     return for_students, for_groups, for_subjects, for_teachers, for_marks
