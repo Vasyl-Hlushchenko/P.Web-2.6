@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS marks (
 );
 """
 
+
 def create_table(conn, create_table_sql):
     try:
         c = conn.cursor()
@@ -54,7 +55,7 @@ def create_table(conn, create_table_sql):
         print(e)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     with create_connection(database) as conn:
         if conn is not None:
@@ -65,4 +66,3 @@ if __name__ == '__main__':
             create_table(conn, sql_create_marks_table)
         else:
             print("Error! cannot create the database connection.")
-

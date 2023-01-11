@@ -39,8 +39,14 @@ def generate_fake_data():
     for _ in range(NUMBER_MARKS):
         fake_marks.append(randint(1, MAX_MARK))
 
-
-    return fake_students, fake_groups, fake_subjects, fake_teachers, fake_dates, fake_marks
+    return (
+        fake_students,
+        fake_groups,
+        fake_subjects,
+        fake_teachers,
+        fake_dates,
+        fake_marks,
+    )
 
 
 def prepare_data(students, groups, subjects, teachers, dates, marks):
@@ -55,7 +61,7 @@ def prepare_data(students, groups, subjects, teachers, dates, marks):
     for_teachers = []
     for teacher in teachers:
         for_teachers.append((teacher,))
-    
+
     for_subjects = []
     for subject in subjects:
         for_subjects.append((subject, randint(1, NUMBER_TEACHERS)))
@@ -63,15 +69,16 @@ def prepare_data(students, groups, subjects, teachers, dates, marks):
     for_marks = []
     for student in students:
         for i in range(1, NUMBER_MARKS):
-            for_marks.append((i, randint(1, len(subjects)+1), choice(marks), choice(dates)))
-    
+            for_marks.append(
+                (i, randint(1, len(subjects) + 1), choice(marks), choice(dates))
+            )
 
     return for_students, for_groups, for_subjects, for_teachers, for_marks
 
 
 def insert_data_to_db(students, groups, subjects, teachers, marks):
 
-    with sqlite3.connect('dbhw.db') as con:
+    with sqlite3.connect("dbhw.db") as con:
 
         cur = con.cursor()
 
